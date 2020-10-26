@@ -7,8 +7,6 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 import Grid from "@material-ui/core/Grid";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 import { default as MuiDivider } from "@material-ui/core/Divider";
@@ -17,26 +15,28 @@ import Layout from "../components/layouts/layout";
 import Divider from "../components/dividers/main-divider";
 import darkTheme from "../styling/themes/dark-theme";
 import lightTheme from "../styling/themes/light-theme";
-import FONT_STYLES, { FONT_SIZES, FONT_WEIGHT } from "../styling/font-styles";
+import FONT_STYLES, { FONT_WEIGHT, LINE_HEIGHT } from "../styling/font-styles";
 import COLORS from "../styling/colors";
 
-import Image from "../images/profile/main-image1.jpg";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
-import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import EmailIcon from "@material-ui/icons/Email";
 import TwitterIcon from "@material-ui/icons/Twitter";
 
 const useStyles = makeStyles(theme => ({
 	root: {
-		margin: theme.spacing(5, 0),
+		padding: theme.spacing(5, 2),
 	},
 	outline: {
 		border: `1px solid ${COLORS.white}`,
-		margin: theme.spacing(5, 2),
+		margin: theme.spacing(5, 0),
+		[theme.breakpoints.down("sm")]: {
+			border: "none",
+			margin: theme.spacing(0),
+		},
 	},
 	topContainer: {
-		padding: theme.spacing(3.5, 0),
+		padding: theme.spacing(3.5, 3),
 	},
 	divider: {
 		width: "95%",
@@ -44,11 +44,15 @@ const useStyles = makeStyles(theme => ({
 	},
 	header: {
 		...FONT_STYLES.title,
+		lineHeight: LINE_HEIGHT.short,
 		textShadow: "none",
 	},
 	subheader: {
 		...FONT_STYLES.subtitle,
-		margin: theme.spacing(0, 0, 2, 0),
+		padding: theme.spacing(2, 0, 3, 0),
+		[theme.breakpoints.down("xs")]: {
+			padding: theme.spacing(5, 0, 3, 0),
+		},
 	},
 	subtitle: {
 		...FONT_STYLES.subtitle,
@@ -145,7 +149,10 @@ export default function Resume() {
 			<Helmet>
 				<meta charSet="utf-8" />
 				<title>Hannah Ong</title>
-				<meta name="description" content="Grow your business with Hyperflyer. Join the Hyperflyer community." />
+				<meta
+					name="description"
+					content="Hannah Ong's Resume as a Front-End developer / engineer. See Hannah Ong's work experience at various companies such as Hyperflyer, Mozilla, RingCentral, Instacart, and more. Download available."
+				/>
 			</Helmet>
 			<ThemeProvider theme={darkTheme}>
 				<CssBaseline />
@@ -167,9 +174,11 @@ export default function Resume() {
 									</Typography>
 								</Grid>
 
-								<Grid item>
-									<Divider />
-								</Grid>
+								{isPhone ? null : (
+									<Grid item>
+										<Divider />
+									</Grid>
+								)}
 							</Grid>
 
 							{/* Contact Icons */}

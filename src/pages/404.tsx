@@ -47,7 +47,7 @@ export default function PageNotFound() {
 			<Helmet>
 				<meta charSet="utf-8" />
 				<title>404 Page Not Found</title>
-				<meta name="description" content="404 Page Not Found" />
+				<meta name="description" content="404 Page Not Found on Hannah Ong's site." />
 			</Helmet>
 			<ThemeProvider theme={darkTheme}>
 				<CssBaseline />
@@ -72,7 +72,7 @@ export default function PageNotFound() {
 						</Grid>
 
 						<Grid item>
-							<img src={Image404} className={classes.image} />
+							<img src={Image404} alt="Astronaut Floating in Space" className={classes.image} />
 						</Grid>
 					</Grid>
 				</Layout>

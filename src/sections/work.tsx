@@ -4,7 +4,7 @@ import Carousel from "../components/carousel/carousel";
 
 import { useStaticQuery, graphql } from "gatsby";
 
-import { ThemeProvider, useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
@@ -16,7 +16,6 @@ import WorkButton from "../components/buttons/work-button";
 import Divider from "../components/dividers/main-divider";
 
 import FONT_STYLES, { FONT_SIZES } from "../styling/font-styles";
-import COLORS from "../styling/colors";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -37,7 +36,9 @@ const useStyles = makeStyles(theme => ({
 	carouselContainer: {
 		position: "relative",
 		minHeight: "450px",
+		WebkitTransform: "translate3d(0, 0, 0)",
 		[theme.breakpoints.down("xs")]: {
+			WebkitTransform: "translate3d(0, 0, 0)",
 			borderRadius: "25px",
 			width: "100px",
 			height: "100px",
@@ -49,7 +50,9 @@ const useStyles = makeStyles(theme => ({
 		margin: theme.spacing(0, 2),
 		boxShadow: "0px 0px 25px 3px rgba(255, 255, 255, 0.5)",
 		transition: "box-shadow .6s ease",
+		WebkitTransform: "translate3d(0, 0, 0)",
 		[theme.breakpoints.down("xs")]: {
+			WebkitTransform: "translate3d(0, 0, 0)",
 			borderRadius: "25px",
 			width: "100px",
 			height: "100px",
@@ -60,15 +63,18 @@ const useStyles = makeStyles(theme => ({
 		},
 	},
 	carouselItem: {
+		WebkitTransform: "translate3d(0, 0, 0)",
 		"&:hover > div": {
 			display: "flex",
 		},
 	},
 	image: {
+		WebkitTransform: "translate3d(0, 0, 0)",
 		position: "relative",
 		margin: theme.spacing(0),
 	},
 	label: {
+		WebkitTransform: "translate3d(0, 0, 0)",
 		background: "rgba(0, 0, 0, 0.8)",
 		position: "absolute",
 		height: "100%",
@@ -77,19 +83,24 @@ const useStyles = makeStyles(theme => ({
 		display: "none",
 	},
 	cardTitle: {
+		WebkitTransform: "translate3d(0, 0, 0)",
 		...FONT_STYLES.subheader,
 	},
 	cardDescription: {
+		WebkitTransform: "translate3d(0, 0, 0)",
 		...FONT_STYLES.miniText,
 		margin: theme.spacing(1, 0),
 	},
 	button: {
+		WebkitTransform: "translate3d(0, 0, 0)",
 		margin: theme.spacing(1, 0),
 	},
 	carousel: {
+		WebkitTransform: "translate3d(0, 0, 0)",
 		display: "flex",
 		height: "400px",
 		[theme.breakpoints.down("xs")]: {
+			WebkitTransform: "translate3d(0, 0, 0)",
 			height: "105px",
 		},
 	},
@@ -163,16 +174,27 @@ export default function Work({ workRef }) {
 				<Carousel className={classes.carousel}>
 					{data.allMarkdownRemark.edges.map(({ node }, index) =>
 						isPhone ? (
-							<ButtonBase href={node.fields.slug} key={index} className={classes.carouselButtonBase}>
+							<ButtonBase
+								href={node.fields.slug}
+								key={index}
+								aria-label={`Go to ${node.frontmatter.title}`}
+								className={classes.carouselButtonBase}
+							>
 								<Grid container key={index}>
-									<img src={node.frontmatter.icon.publicURL} className={classes.image} />
+									<img src={node.frontmatter.icon.publicURL} alt={node.frontmatter.title} className={classes.image} />
 								</Grid>
 							</ButtonBase>
 						) : (
-							<ButtonBase href={node.fields.slug} key={index} className={classes.carouselButtonBase}>
+							<ButtonBase
+								href={node.fields.slug}
+								key={index}
+								aria-label={`Go to ${node.frontmatter.title}`}
+								className={classes.carouselButtonBase}
+							>
 								<Grid container key={index} className={classes.carouselItem}>
 									<img
 										src={node.frontmatter.coverPhoto.publicURL}
+										alt={node.frontmatter.title}
 										className={classes.image}
 										style={{
 											width: "580px",
@@ -193,7 +215,9 @@ export default function Work({ workRef }) {
 										<Typography color="primary" align="left" className={classes.cardDescription}>
 											{node.frontmatter.description}
 										</Typography>
-										<WorkButton href={node.fields.slug}>Details</WorkButton>
+										<WorkButton href={node.fields.slug} ariaLabel={`Go to ${node.frontmatter.title}`}>
+											Details
+										</WorkButton>
 									</Grid>
 								</Grid>
 							</ButtonBase>

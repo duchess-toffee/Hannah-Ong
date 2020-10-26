@@ -38,7 +38,7 @@ export default function NavBar({ onTheme }) {
 	const [resumeNav, setResumeNav] = useState(false);
 
 	useEffect(() => {
-		if (window.location.pathname === "/resume") {
+		if (window.location.pathname === "/resume" || window.location.pathname === "/resume/") {
 			setResumeNav(true);
 			setMainNav(false);
 		} else if (window.location.pathname !== "/") {
@@ -116,7 +116,7 @@ export default function NavBar({ onTheme }) {
 						<Grid container item wrap="nowrap" justify="flex-end" alignItems="center" spacing={2} xs={8}>
 							{displayLinks}
 							{displayPrint}
-							<Grid item>{/* <LightDarkToggle onTheme={onTheme} /> */}</Grid>
+							{/*<Grid item> <LightDarkToggle onTheme={onTheme} /> </Grid>*/}
 						</Grid>
 					</Grid>
 				</Toolbar>

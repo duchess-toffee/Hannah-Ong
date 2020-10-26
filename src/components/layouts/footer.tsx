@@ -1,18 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link as GatsbyLink } from "gatsby";
 
-import { ThemeProvider, useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
-import IconButton from "@material-ui/core/IconButton";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
-// import ResumeIcon from "@material-ui/icons/InsertDriveFile";
 import ResumeIcon from "@material-ui/icons/ListAlt";
 
 import FooterLogo from "../logos/footer-logo";
@@ -55,27 +52,42 @@ export default function Footer() {
 		</Grid>
 	);
 
-	const spacing = isPhone ? 1 : 3;
+	const spacing = isPhone ? 2 : 3;
 
 	const displayIcons = isTablet ? (
 		<>
 			<Grid item>
-				<Link href="https://github.com/duchess-toffee" underline="none" className={classes.links}>
+				<Link
+					href="https://github.com/duchess-toffee"
+					aria-label="Go to GitHub"
+					underline="none"
+					className={classes.links}
+				>
 					<GitHubIcon className={classes.icons} />
 				</Link>
 			</Grid>
 			<Grid item>
-				<Link href="https://www.linkedin.com/in/hannah-ong/" underline="none" className={classes.links}>
+				<Link
+					href="https://www.linkedin.com/in/hannah-ong/"
+					aria-label="Go to LinkedIn"
+					underline="none"
+					className={classes.links}
+				>
 					<LinkedInIcon className={classes.icons} />
 				</Link>
 			</Grid>
 			<Grid item>
-				<Link href="https://twitter.com/duchess_toffee" underline="none" className={classes.links}>
+				<Link
+					href="https://twitter.com/duchess_toffee"
+					aria-label="Go to Twitter"
+					underline="none"
+					className={classes.links}
+				>
 					<TwitterIcon className={classes.icons} />
 				</Link>
 			</Grid>
 			<Grid item>
-				<GatsbyLink to="/resume" className={classes.links}>
+				<GatsbyLink to="/resume" aria-label="Go to Resume" className={classes.links}>
 					<ResumeIcon className={classes.icons} />
 				</GatsbyLink>
 			</Grid>

@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 
 import clsx from "clsx";
-import { ThemeProvider, useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
@@ -16,7 +16,7 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 
-import MainImg from "../images/profile/main-image6.jpg";
+import MainImg from "../images/profile/main-image1.jpg";
 
 import Divider from "../components/dividers/main-divider";
 
@@ -26,7 +26,7 @@ import COLORS from "../styling/colors";
 const useStyles = makeStyles(theme => ({
 	root: {
 		minHeight: "900px",
-		margin: theme.spacing(5, 2),
+		padding: theme.spacing(5, 2),
 		[theme.breakpoints.down("xs")]: {
 			minHeight: "700px",
 		},
@@ -39,6 +39,9 @@ const useStyles = makeStyles(theme => ({
 	},
 	mainText: {
 		margin: theme.spacing(0, 0, 0, 5),
+		[theme.breakpoints.down("xs")]: {
+			margin: theme.spacing(0),
+		},
 	},
 	header: {
 		...FONT_STYLES.title,
@@ -67,12 +70,16 @@ const useStyles = makeStyles(theme => ({
 	rightBox: {
 		position: "absolute",
 		backgroundColor: "#282828",
-		height: "410px",
-		width: "260px",
+		height: "350px",
+		width: "250px",
 		top: "350px",
-		right: "-75px",
-		filter: "drop-shadow(0px 5px 50px rgba(158, 158, 158, 0.25))",
+		right: "-100px",
+		// WebkitFilter: "drop-shadow(0px 5px 50px rgba(158, 158, 158, 0.25))",
+		// filter: "drop-shadow(0px 5px 50px rgba(158, 158, 158, 0.25))",
+		boxShadow: "0px 5px 50px 5px rgba(158, 158, 158, 0.25)",
 		[theme.breakpoints.down("sm")]: {
+			// height: "400px",
+			// width: "275px",
 			top: "225px",
 			right: "75px",
 		},
@@ -80,18 +87,22 @@ const useStyles = makeStyles(theme => ({
 			height: "205px",
 			width: "130px",
 			top: "100px",
-			right: "70px",
+			right: "15px",
 		},
 	},
 	topBox: {
 		position: "absolute",
 		backgroundColor: "#5A5A5A",
-		height: "240px",
-		width: "425px",
+		height: "235px",
+		width: "375px",
 		top: "150px",
-		right: "-100px",
-		filter: "drop-shadow(0px 5px 50px rgba(158, 158, 158, 0.25))",
+		right: "-150px",
+		// WebkitFilter: "drop-shadow(0px 5px 50px rgba(158, 158, 158, 0.25))",
+		// filter: "drop-shadow(0px 5px 50px rgba(158, 158, 158, 0.25))",
+		boxShadow: "0px 5px 50px 5px rgba(158, 158, 158, 0.25)",
 		[theme.breakpoints.down("sm")]: {
+			// height: "250px",
+			// width: "400px",
 			top: "25px",
 			right: "50px",
 		},
@@ -99,18 +110,22 @@ const useStyles = makeStyles(theme => ({
 			height: "120px",
 			width: "212.5px",
 			top: "0px",
-			right: "50px",
+			right: "0px",
 		},
 	},
 	bottomBox: {
 		position: "absolute",
 		backgroundColor: "#929292",
-		height: "175px",
-		width: "300px",
+		height: "125px",
+		width: "250px",
 		top: "525px",
-		right: "100px",
-		filter: "drop-shadow(0px 5px 50px rgba(158, 158, 158, 0.25))",
+		right: "25px",
+		// WebkitFilter: "drop-shadow(0px 5px 50px rgba(158, 158, 158, 0.25))",
+		// filter: "drop-shadow(0px 5px 50px rgba(158, 158, 158, 0.25))",
+		boxShadow: "0px 5px 50px 5px rgba(158, 158, 158, 0.25)",
 		[theme.breakpoints.down("sm")]: {
+			// height: "175px",
+			// width: "300px",
 			top: "400px",
 			right: "225px",
 		},
@@ -118,7 +133,7 @@ const useStyles = makeStyles(theme => ({
 			height: "87.5px",
 			width: "150px",
 			top: "185px",
-			right: "150px",
+			right: "100px",
 		},
 	},
 	image: {
@@ -126,11 +141,13 @@ const useStyles = makeStyles(theme => ({
 		backgroundColor: "lightgray",
 		objectPosition: "left",
 		objectFit: "cover",
-		height: "480px",
-		width: "380px",
+		height: "430px",
+		width: "330px",
 		top: "200px",
-		right: "0",
+		right: "-75px",
 		[theme.breakpoints.down("sm")]: {
+			// height: "475px",
+			// width: "375px",
 			top: "75px",
 			right: "125px",
 		},
@@ -138,7 +155,7 @@ const useStyles = makeStyles(theme => ({
 			height: "240px",
 			width: "190px",
 			top: "25px",
-			right: "100px",
+			right: "50px",
 		},
 	},
 	icons: {
@@ -150,13 +167,20 @@ const useStyles = makeStyles(theme => ({
 	iconList: {
 		background: COLORS.blueGradient,
 		padding: theme.spacing(0),
+		"& > li": {
+			backgroundColor: "black",
+			mixBlendMode: "darken",
+			boxShadow: "0px 0px 0px 15px black",
+		},
 	},
 	icon: {
-		backgroundColor: "black",
-		mixBlendMode: "darken",
-		boxShadow: "0px 0px 0px 20px black",
+		[theme.breakpoints.down("sm")]: {
+			height: "30px",
+			width: "30px",
+		},
 		[theme.breakpoints.down("xs")]: {
 			height: "20px",
+			width: "20px",
 		},
 	},
 	descriptor: {
@@ -171,6 +195,9 @@ const useStyles = makeStyles(theme => ({
 		backgroundSize: "200px",
 		color: "rgba(255, 255, 255, 0.3)",
 		WebkitBackgroundClip: "text",
+		backgroundClip: "text",
+		WebkitAnimation: `$shine 5000ms ${theme.transitions.easing.easeInOut}`,
+		WebkitAnimationIterationCount: "infinite",
 		animation: `$shine 5000ms ${theme.transitions.easing.easeInOut}`,
 		animationIterationCount: "infinite",
 		"&:hover": {
@@ -198,6 +225,7 @@ export default function Hero() {
 	const isMobile = useMediaQuery(MuiTheme.breakpoints.down("xs"));
 	const isTooSmall = useMediaQuery("(max-width:325px)");
 	const [descriptorIndex, setDescriptorIndex] = useState(0);
+	const [isLoading, setIsLoading] = useState(true);
 	const [visible, setVisible] = useState(true);
 	const descriptors = ["dog owner", "boulderer", "amateur gardener", "occassional designer"];
 
@@ -208,25 +236,37 @@ export default function Hero() {
 	const hideIcons = isTooSmall ? null : (
 		<List className={classes.iconList}>
 			<ListItem style={{ margin: 0, padding: 0 }}>
-				<IconButton href="https://github.com/duchess-toffee">
+				<IconButton
+					href="https://github.com/duchess-toffee"
+					aria-label="Go to GitHub"
+					style={{ background: "transparent" }}
+				>
 					<GitHubIcon color="primary" className={classes.icon} />
 				</IconButton>
 			</ListItem>
 
 			<ListItem style={{ margin: 0, padding: 0 }}>
-				<IconButton href="https://www.linkedin.com/in/hannah-ong/">
+				<IconButton
+					href="https://www.linkedin.com/in/hannah-ong/"
+					aria-label="Go to LinkedIn"
+					style={{ background: "transparent" }}
+				>
 					<LinkedInIcon color="primary" className={classes.icon} />
 				</IconButton>
 			</ListItem>
 
 			<ListItem style={{ margin: 0, padding: 0 }}>
-				<IconButton href="https://twitter.com/duchess_toffee">
+				<IconButton
+					href="https://twitter.com/duchess_toffee"
+					aria-label="Go to Twitter"
+					style={{ background: "transparent" }}
+				>
 					<TwitterIcon color="primary" className={classes.icon} />
 				</IconButton>
 			</ListItem>
 
 			<ListItem style={{ margin: 0, padding: 0 }}>
-				<IconButton href="#contact">
+				<IconButton href="#contact" aria-label="Go to Contact" style={{ background: "transparent" }}>
 					<MailOutlineIcon color="primary" className={classes.icon} />
 				</IconButton>
 			</ListItem>
@@ -241,67 +281,75 @@ export default function Hero() {
 		}, 600);
 	}, [descriptorIndex, visible]);
 
-	// useEffect(() => {
-	//   setTimeout(() => {
-	//     setDescriptorIndex((descriptorIndex + 1) % descriptors.length)
-	//     setVisible(true)
-	//   }, 3000)
-	// }, [descriptorIndex, visible])
+	useEffect(() => {
+		setIsLoading(false);
+	}, [isLoading]);
 
 	return (
 		<Grid container direction={mainDirection} wrap="nowrap" spacing={6} className={classes.root}>
 			{/* Left Section (Divider, Subtitle, Header, SubHeader) */}
-			<Grid container item direction="column" justify="center" spacing={titleSpacing} xs={6}>
-				<Grid container item direction="column" spacing={4}>
-					<Grid item>
-						<Divider />
+			{isLoading ? null : (
+				<Grid container item direction="column" justify="center" spacing={titleSpacing} xs={isMobile ? 12 : 6}>
+					<Grid container item direction="column" spacing={4}>
+						<Grid item>
+							<Divider />
+						</Grid>
+
+						<Grid item>
+							<Typography variant="h1" noWrap color="primary" className={classes.subtitle}>
+								Hello and Welcome!
+							</Typography>
+						</Grid>
 					</Grid>
 
-					<Grid item>
-						<Typography variant="h1" noWrap color="primary" className={classes.subtitle}>
-							Hello and Welcome!
-						</Typography>
+					<Grid container item direction="column" spacing={spacing} className={classes.mainText}>
+						<Grid item>
+							<Typography variant="h1" noWrap color="primary" className={classes.header}>
+								Hannah Ong,
+							</Typography>
+						</Grid>
+
+						<Grid item>
+							<Typography variant="h2" noWrap color="primary" className={classes.subheader}>
+								Web Developer & <br />
+								<span
+									onClick={handleDescriptorChange}
+									className={clsx(classes.descriptor, {
+										[classes.animation]: visible,
+									})}
+								>
+									{descriptors[descriptorIndex]}
+								</span>
+							</Typography>
+						</Grid>
 					</Grid>
 				</Grid>
-
-				<Grid container item direction="column" spacing={spacing} className={classes.mainText}>
-					<Grid item>
-						<Typography variant="h1" noWrap color="primary" className={classes.header}>
-							Hannah Ong,
-						</Typography>
-					</Grid>
-
-					<Grid item>
-						<Typography variant="h2" noWrap color="primary" className={classes.subheader}>
-							Web Developer & <br />
-							<span
-								onClick={handleDescriptorChange}
-								className={clsx(classes.descriptor, {
-									[classes.animation]: visible,
-								})}
-							>
-								{descriptors[descriptorIndex]}
-							</span>
-						</Typography>
-					</Grid>
-				</Grid>
-			</Grid>
+			)}
 
 			{/* Right Section (Image & Icons) */}
-			<Grid container item direction={rightDirection} wrap="nowrap" className={classes.rightContainer}>
-				{/* Middle Section (Image) */}
-				<Grid container item alignItems="center" className={classes.imageContainer} xs={11}>
-					<Box className={classes.rightBox}></Box>
-					<Box className={classes.topBox}></Box>
-					<Box className={classes.bottomBox}></Box>
-					<img src={MainImg} alt="Hannah and Toffee" className={classes.image} />
-				</Grid>
+			{isLoading ? null : (
+				<Grid
+					container
+					item
+					direction={rightDirection}
+					wrap="nowrap"
+					justify={isTooSmall ? "flex-start" : isMobile ? "flex-end" : "flex-start"}
+					className={classes.rightContainer}
+				>
+					{/* Middle Section (Image) */}
+					<Grid container item alignItems="center" className={classes.imageContainer} xs={isMobile ? 10 : 11}>
+						<Box className={classes.rightBox}></Box>
+						<Box className={classes.topBox}></Box>
+						<Box className={classes.bottomBox}></Box>
+						<img src={MainImg} alt="Hannah Ong's Profile Picture" className={classes.image} />
+					</Grid>
 
-				{/*  Icons*/}
-				<Grid container item alignItems="flex-end" justify="flex-end" className={classes.icons} xs={1}>
-					{hideIcons}
+					{/*  Icons*/}
+					<Grid container item alignItems="flex-end" justify="flex-end" className={classes.icons} xs={1}>
+						{hideIcons}
+					</Grid>
 				</Grid>
-			</Grid>
+			)}
 		</Grid>
 	);
 }

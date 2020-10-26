@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 import Layout from "../components/layouts/layout";
 import Hero from "../sections/hero";
 import About from "../sections/about";
-import Work from "../sections/work2";
+import Work from "../sections/work";
 import Blog from "../sections/blog";
 import Contact from "../sections/contact";
 import { ThemeProvider } from "@material-ui/core";
@@ -87,8 +87,11 @@ export default function Home() {
 		<>
 			<Helmet>
 				<meta charSet="utf-8" />
-				<title>Hannah Ong's Resume</title>
-				<meta name="description" content="Hannah Ong's Resume" />
+				<title>Hannah Ong</title>
+				<meta
+					name="description"
+					content="Hannah Ong. 💻 Web Developer. 🎨 Occasional Designer. 🧗‍ Boulderer. 🌷 Amateur Gardener. 🐕 Dog Owner and Lover. See photos, work, blog posts, and additional information about Hannah Ong / duchess-toffee."
+				/>
 			</Helmet>
 			<ThemeProvider theme={darkTheme}>
 				<CssBaseline />

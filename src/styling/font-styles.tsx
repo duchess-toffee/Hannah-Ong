@@ -1,4 +1,3 @@
-import colors from "./colors";
 import "./fonts.css";
 
 const FONT_FAMILY = {

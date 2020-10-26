@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
-
-import { Link } from "gatsby";
+import React, { useState, useEffect } from "react";
 
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
@@ -14,6 +12,7 @@ const useStyles = makeStyles(theme => ({
 	root: {
 		background: "transparent",
 		boxShadow: "none",
+		width: "55px",
 		margin: theme.spacing(15, 0, 0, 0),
 		[theme.breakpoints.down("xs")]: {
 			display: "none",
@@ -79,6 +78,7 @@ export default function SideNavBar({ index }) {
 							<Button
 								href="#"
 								color="primary"
+								aria-label={`Go to Home Section`}
 								className={clsx(classes.bar, {
 									[classes.activeBar]: sectionIndex === 0,
 								})}
@@ -87,6 +87,7 @@ export default function SideNavBar({ index }) {
 							<Button
 								href="#about"
 								color="primary"
+								aria-label={`Go to About Section`}
 								className={clsx(classes.bar, {
 									[classes.activeBar]: sectionIndex === 1,
 								})}
@@ -95,6 +96,7 @@ export default function SideNavBar({ index }) {
 							<Button
 								href="#work"
 								color="primary"
+								aria-label={`Go to Work Section`}
 								className={clsx(classes.bar, {
 									[classes.activeBar]: sectionIndex === 2,
 								})}
@@ -103,6 +105,7 @@ export default function SideNavBar({ index }) {
 							<Button
 								href="#blog"
 								color="primary"
+								aria-label={`Go to Blog Section`}
 								className={clsx(classes.bar, {
 									[classes.activeBar]: sectionIndex === 3,
 								})}
@@ -111,6 +114,7 @@ export default function SideNavBar({ index }) {
 							<Button
 								href="#contact"
 								color="primary"
+								aria-label={`Go to Contact Section`}
 								className={clsx(classes.bar, {
 									[classes.activeBar]: sectionIndex === 4,
 								})}

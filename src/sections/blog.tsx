@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 
 import { useStaticQuery, graphql } from "gatsby";
 
-import { ThemeProvider, useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
@@ -134,9 +134,10 @@ const useStyles = makeStyles(theme => ({
 		overflow: "hidden",
 		"& > img": {
 			margin: theme.spacing(0),
-			[theme.breakpoints.down("xs")]: {
-				height: "250px",
-				maxWidth: "unset",
+			maxWidth: "100%",
+			objectFit: "contain",
+			[theme.breakpoints.down("sm")]: {
+				minHeight: "250px",
 			},
 		},
 	},
@@ -209,7 +210,7 @@ export default function Blog({ blogRef }) {
 			<Grid container item justify="space-between" className={classes.cards}>
 				{data.allMarkdownRemark.edges.map(({ node }, index) => (
 					<Box key={index} className={classes.border}>
-						<ButtonBase href={node.fields.slug} className={classes.card}>
+						<ButtonBase href={node.fields.slug} aria-label={`Go to ${node.frontmatter.title}`} className={classes.card}>
 							{/* text content */}
 							<Grid
 								container
@@ -237,7 +238,9 @@ export default function Blog({ blogRef }) {
 							{/* image */}
 							{isPhone ? null : (
 								<Grid container item alignContent="center" xs={8} className={classes.image}>
-									{node.frontmatter.photo !== null ? <img src={node.frontmatter.photo.publicURL} /> : null}
+									{node.frontmatter.photo !== null ? (
+										<img src={node.frontmatter.photo.publicURL} alt={node.frontmatter.title} />
+									) : null}
 								</Grid>
 							)}
 						</ButtonBase>

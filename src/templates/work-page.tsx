@@ -22,10 +22,10 @@ import lightTheme from "../styling/themes/light-theme";
 
 const useStyles = makeStyles(theme => ({
 	root: {
-		margin: theme.spacing(10, 0),
+		padding: theme.spacing(10, 2),
 		minHeight: "1000px",
 		[theme.breakpoints.down("sm")]: {
-			padding: theme.spacing(2),
+			padding: theme.spacing(5, 2),
 		},
 	},
 	header: {
@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
 		fontSize: "13px",
 		textTransform: "uppercase",
 		margin: theme.spacing(2, 0, 0, 0),
-		[theme.breakpoints.down("xs")]: {
+		[theme.breakpoints.down("sm")]: {
 			margin: theme.spacing(0),
 		},
 	},
@@ -63,7 +63,7 @@ const useStyles = makeStyles(theme => ({
 			margin: theme.spacing(5, 0, 0, 0),
 		},
 		[theme.breakpoints.down("xs")]: {
-			margin: theme.spacing(5, 3),
+			margin: theme.spacing(5, 0),
 		},
 	},
 	imageContainer: {
@@ -72,13 +72,16 @@ const useStyles = makeStyles(theme => ({
 		maxHeight: "500px",
 		padding: theme.spacing(0),
 		borderRadius: "0px 0px 5px 5px",
-		filter: "drop-shadow(10px 10px 15px rgba(0, 0, 0, 0.25))",
+		boxShadow: "0px 5px 50px 5px rgba(158, 158, 158, 0.25)",
 		scrollbarWidth: "none",
 		"&::-webkit-scrollbar": {
 			display: "none",
 		},
 		[theme.breakpoints.down("sm")]: {
 			maxHeight: "500px",
+		},
+		[theme.breakpoints.down("xs")]: {
+			maxHeight: "200px",
 		},
 	},
 	imageBar: {
@@ -124,7 +127,7 @@ export default function WorkPost({ data }) {
 			<Helmet>
 				<meta charSet="utf-8" />
 				<title>Hannah Ong Work - {post.frontmatter.title}</title>
-				<meta name="description" content={post.frontmatter.description} />
+				<meta name="description" content={`${post.frontmatter.title}: ${post.frontmatter.description}`} />
 			</Helmet>
 			<ThemeProvider theme={darkTheme}>
 				<CssBaseline />
@@ -136,7 +139,7 @@ export default function WorkPost({ data }) {
 						justify="space-between"
 						alignItems="center"
 						className={classes.root}
-						spacing={isTablet ? null : 4}
+						spacing={4}
 					>
 						{/* Left Section (Divider, Title, Description, Year, Tools) */}
 						<Grid container item direction="column" spacing={4} xs={size}>
@@ -170,7 +173,7 @@ export default function WorkPost({ data }) {
 							</Grid>
 
 							<Grid item>
-								<MainButton href={post.frontmatter.link} type="button">
+								<MainButton href={post.frontmatter.link} type="button" ariaLabel={`Go to ${post.frontmatter.title}`}>
 									Go To Site
 								</MainButton>
 							</Grid>
@@ -188,7 +191,7 @@ export default function WorkPost({ data }) {
 							>
 								<DesktopBar className={classes.imageBar} />
 								<Grid item className={classes.imageContainer}>
-									<img src={post.frontmatter.photo.publicURL} className={classes.image} />
+									<img src={post.frontmatter.photo.publicURL} alt={post.frontmatter.title} className={classes.image} />
 								</Grid>
 							</Grid>
 

@@ -91,7 +91,7 @@ export default function Contact({ contactRef }) {
 
 			<form
 				name="contact-form"
-				action="https://jo4px1n85a.execute-api.us-east-1.amazonaws.com/dev/contact"
+				action="https://k3qh929kkk.execute-api.us-east-1.amazonaws.com/production/contact"
 				method="POST"
 			>
 				<Grid container direction="column" alignItems="center" item>
@@ -118,12 +118,20 @@ export default function Contact({ contactRef }) {
 						</Grid>
 					</Drawer>
 					<Grid item onClick={() => setOpen(false)}>
-						{open ? <MainButton type="submit">Submit</MainButton> : null}
+						{open ? (
+							<MainButton type="submit" ariaLabel={"Submit Contact Form"}>
+								Submit
+							</MainButton>
+						) : null}
 					</Grid>
 				</Grid>
 			</form>
 			<Grid item onClick={() => setOpen(true)} style={{ padding: 0 }}>
-				{open ? null : <MainButton type="button">Contact Me</MainButton>}
+				{open ? null : (
+					<MainButton type="button" ariaLabel={"Contact Me"}>
+						Contact Me
+					</MainButton>
+				)}
 			</Grid>
 		</Grid>
 	);

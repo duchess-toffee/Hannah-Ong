@@ -15,13 +15,16 @@ import Divider from "../components/dividers/main-divider";
 import COLORS from "../styling/colors";
 import darkTheme from "../styling/themes/dark-theme";
 import lightTheme from "../styling/themes/light-theme";
-import FONT_STYLES, { FONT_SIZES } from "../styling/font-styles";
+import FONT_STYLES, { FONT_SIZES, FONT_FAMILY } from "../styling/font-styles";
 import QuoteStart from "../images/icons/quote-start.svg";
 import QuoteEnd from "../images/icons/quote-end.svg";
 
 const useStyles = makeStyles(theme => ({
 	root: {
-		margin: theme.spacing(10, 0),
+		padding: theme.spacing(10, 2),
+		[theme.breakpoints.down("sm")]: {
+			padding: theme.spacing(5, 2),
+		},
 	},
 	subtitle: {
 		...FONT_STYLES.subtitle,
@@ -46,17 +49,24 @@ const useStyles = makeStyles(theme => ({
 		width: "500px",
 		height: "auto",
 		margin: theme.spacing(0),
+		[theme.breakpoints.down("xs")]: {
+			width: "250px",
+		},
 	},
 	text: {
 		maxWidth: "900px",
-		margin: theme.spacing(5),
+		padding: theme.spacing(5),
 		...FONT_STYLES.text,
 		[theme.breakpoints.down("xs")]: {
 			fontSize: FONT_SIZES.small,
+			padding: theme.spacing(2),
+		},
+		"& > h1": {
+			...FONT_STYLES.title,
+			fontSize: FONT_SIZES.large,
 		},
 		"& > *": {
 			color: COLORS.white,
-			margin: theme.spacing(0, 0, 4, 0),
 			"& > *": {
 				color: COLORS.white,
 			},
@@ -64,10 +74,11 @@ const useStyles = makeStyles(theme => ({
 	},
 	quote: {
 		...FONT_STYLES.text,
+		margin: theme.spacing(0, 5),
 		[theme.breakpoints.down("xs")]: {
 			fontSize: FONT_SIZES.small,
+			margin: theme.spacing(0, 2),
 		},
-		margin: theme.spacing(0, 5),
 		"& svg:first-child": {
 			margin: theme.spacing(0, 1, 0, 0),
 		},
@@ -102,7 +113,7 @@ export default function BlogPost({ data }) {
 			<Helmet>
 				<meta charSet="utf-8" />
 				<title>Hannah Ong Blog - {post.frontmatter.title}</title>
-				<meta name="description" content={post.frontmatter.description} />
+				<meta name="description" content={`${post.frontmatter.title}: ${post.frontmatter.description}`} />
 			</Helmet>
 			<ThemeProvider theme={darkTheme}>
 				<CssBaseline />
@@ -142,7 +153,7 @@ export default function BlogPost({ data }) {
 							{/* Top Right Section (Image) */}
 							<Grid container item justify="center" xs={topSize}>
 								<Box className={classes.border}>
-									<img src={post.frontmatter.photo.publicURL} className={classes.image} />
+									<img src={post.frontmatter.photo.publicURL} alt={post.frontmatter.title} className={classes.image} />
 								</Box>
 							</Grid>
 						</Grid>

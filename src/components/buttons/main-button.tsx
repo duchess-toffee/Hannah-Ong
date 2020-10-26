@@ -42,14 +42,14 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-export default function MainButton({ href, type, children }) {
+export default function MainButton({ href, type, ariaLabel, children }) {
 	const classes = useStyles();
 
 	return (
 		<Box className={classes.root}>
-			<Button href={href} type={type || "button"} color="primary" className={classes.button}>
+			<Button href={href} type={type || "button"} color="primary" aria-label={ariaLabel} className={classes.button}>
 				{children}
-				<ArrowImg className={classes.arrow} />
+				<ArrowImg alt="arrow button" className={classes.arrow} />
 			</Button>
 		</Box>
 	);
