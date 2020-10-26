@@ -60,6 +60,8 @@ module.exports = {
     `gatsby-transformer-remark`,
     `gatsby-plugin-react-svg`,
     `gatsby-plugin-material-ui`,
-    `gatsby-plugin-offline`
+    `gatsby-plugin-offline`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`
   ],
 }

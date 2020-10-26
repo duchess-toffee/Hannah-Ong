@@ -11,7 +11,7 @@ tag: "blog"
 
 To answer that, let's take a step back. When I started coding, I spent my first few months following online tutorials and projects. At first I started with [freeCodeCamp](https://www.freecodecamp.org/learn/). Shortly afterwards I followed [JavaScript30](https://javascript30.com/). I created small projects of things that already existed-like a [morse code generator](https://github.com/duchess-toffee/morse_code), [tic-tac-toe](https://github.com/duchess-toffee/tic_tac_toe), a [weather app](https://github.com/duchess-toffee/weather_station); things that didn't take more than a few days. I read some books like [Eloquent JavaScript](https://eloquentjavascript.net/), I watched some videos on YouTube, I did some [HackerRank](https://www.hackerrank.com/)-all the things I thought I needed to know to get a general base understanding of Web Development.
 
-Don't get me wrong. I'm glad I learned the things I did, and I'm grateful that I live in a generation where there are so many free resources to learn from. But "tutorial hell" is infamous for a reason. I found that I was absorbing less through tutorials as time went on. The problem with tutorials and structured lessons is that the enviornment is made in such a way that will almost always guide you to an intended answer to demonstrate the concept they're trying to teach. It's a great way to learn a general concept, framework, or tool, but what it rarely teaches you is how to make decisions or how to debug.
+Don't get me wrong. I'm glad I learned the things I did, and I'm grateful that I live in a generation where there are so many free resources to learn from. But "tutorial hell" is infamous for a reason. I found that I was absorbing less through tutorials as time went on. The problem with tutorials and structured lessons is that the environment is made in such a way that will almost always guide you to an intended answer to demonstrate the concept they're trying to teach. It's a great way to learn a general concept, framework, or tool, but what it rarely teaches you is how to make decisions or how to debug.
 
 # Don't fear the blank canvas.
 
@@ -23,9 +23,9 @@ Another thing tutorials don't do is emphasize the importance of official documen
 
 # Do the Pre-Work
 
-The fastest way to burn yourself out is to not prioitize. Although I have a handful of projects completed, I have another batch of unfinished projects just sitting on my hard drive. The main difference? A lack of process and prioritization.
+The fastest way to burn yourself out is to not prioritize. Although I have a handful of projects completed, I have another batch of unfinished projects just sitting on my hard drive. The main difference? A lack of process and prioritization.
 
-Now before I start coding, I spend the time to create a design or document. This allows me to code towards something concrete. I'm not changing code on the fly because the UI/UX feels unsatifactory, and I'm not adding random features because I had a stroke of inspiration. When something does come up, because I did my pre-work I'm easily able to prioritize whether something needs to be added or if it can wait for a separate iteration.
+Now before I start coding, I spend the time to create a design or document. This allows me to code towards something concrete. I'm not changing code on the fly because the UI/UX feels unsatisfactory, and I'm not adding random features because I had a stroke of inspiration. When something does come up, because I did my pre-work I'm easily able to prioritize whether something needs to be added or if it can wait for a separate iteration.
 
 # Summary
 

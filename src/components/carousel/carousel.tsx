@@ -11,9 +11,9 @@ const useStyles = makeStyles(theme => ({
 		display: "flex",
 	},
 	element: {
-		WebkitAnimation: `$slidein 20s linear`,
+		WebkitAnimation: `$slidein 50s linear`,
 		WebkitAnimationIterationCount: "infinite",
-		animation: `$slidein 20s linear`,
+		animation: `$slidein 50s linear`,
 		animationIterationCount: "infinite",
 		WebkitTransform: "translate3d(0, 0, 0)",
 		WebkitPerspective: "1000px",
@@ -37,9 +37,9 @@ const useStyles = makeStyles(theme => ({
 		},
 	},
 	relement: {
-		WebkitAnimation: `$rslidein 20s linear`,
+		WebkitAnimation: `$rslidein 50s linear`,
 		WebkitAnimationIterationCount: "infinite",
-		animation: `$rslidein 20s linear`,
+		animation: `$rslidein 50s linear`,
 		animationIterationCount: "infinite",
 		WebkitTransform: "translate3d(0, 0, 0)",
 	},
@@ -63,14 +63,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function cloneElements(children, baseClass, className) {
-	return [1, 2, 3, 4].map(index => (
+	return [1, 2, 3, 4, 5].map(index => (
 		<div key={index} className={`${baseClass} ${className}`}>
 			{children}
 		</div>
 	));
 }
 function phoneElements(children, baseClass, className) {
-	return [1, 2, 3].map(index => (
+	return [1, 2, 3, 4].map(index => (
 		<div key={index} className={`${baseClass} ${className}`}>
 			{children}
 		</div>
