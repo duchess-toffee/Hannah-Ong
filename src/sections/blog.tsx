@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 
 import { useStaticQuery, graphql } from "gatsby";
+import Img from "gatsby-image";
 
 import { useTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
@@ -159,7 +160,7 @@ export default function Blog({ blogRef }) {
 	}, [ref]);
 
 	const data = useStaticQuery(graphql`
-		query blogQuery {
+		query {
 			allMarkdownRemark(
 				sort: { fields: frontmatter___date, order: DESC }
 				filter: { fileAbsolutePath: { regex: "/.posts/blog./" } }
@@ -172,7 +173,11 @@ export default function Blog({ blogRef }) {
 							date(formatString: "MMM DD, YYYY")
 							title
 							photo {
-								publicURL
+								childImageSharp {
+									fluid(quality: 100) {
+										...GatsbyImageSharpFluid
+									}
+								}
 							}
 						}
 						fields {
@@ -239,7 +244,11 @@ export default function Blog({ blogRef }) {
 							{isPhone ? null : (
 								<Grid container item alignContent="center" xs={8} className={classes.image}>
 									{node.frontmatter.photo !== null ? (
-										<img src={node.frontmatter.photo.publicURL} alt={node.frontmatter.title} />
+										<Img
+											fluid={node.frontmatter.photo.childImageSharp.fluid}
+											alt={node.frontmatter.title}
+											style={{ width: "100%", height: "100%" }}
+										/>
 									) : null}
 								</Grid>
 							)}

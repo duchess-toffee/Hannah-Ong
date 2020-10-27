@@ -1,5 +1,8 @@
 import React, { useCallback, useState, useEffect } from "react";
 
+import { useStaticQuery, graphql } from "gatsby";
+import Img from "gatsby-image";
+
 import clsx from "clsx";
 import { useTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
@@ -15,8 +18,6 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
-
-import MainImg from "../images/profile/main-image1.jpg";
 
 import Divider from "../components/dividers/main-divider";
 
@@ -285,6 +286,35 @@ export default function Hero() {
 		setIsLoading(false);
 	}, [isLoading]);
 
+	const profileImg = useStaticQuery(graphql`
+		query {
+			desktop_tablet: allFile(filter: { relativeDirectory: { regex: "/images/profile/" } }) {
+				edges {
+					node {
+						name
+						childImageSharp {
+							fixed(width: 330, height: 430, quality: 100) {
+								...GatsbyImageSharpFixed
+							}
+						}
+					}
+				}
+			}
+			mobile: allFile(filter: { relativeDirectory: { regex: "/images/profile/" } }) {
+				edges {
+					node {
+						name
+						childImageSharp {
+							fixed(width: 190, height: 240, quality: 100) {
+								...GatsbyImageSharpFixed
+							}
+						}
+					}
+				}
+			}
+		}
+	`);
+
 	return (
 		<Grid container direction={mainDirection} wrap="nowrap" spacing={6} className={classes.root}>
 			{/* Left Section (Divider, Subtitle, Header, SubHeader) */}
@@ -341,7 +371,16 @@ export default function Hero() {
 						<Box className={classes.rightBox}></Box>
 						<Box className={classes.topBox}></Box>
 						<Box className={classes.bottomBox}></Box>
-						<img src={MainImg} alt="Hannah Ong's Profile Picture" className={classes.image} />
+						<Img
+							fixed={
+								isMobile
+									? profileImg.mobile.edges[0].node.childImageSharp.fixed
+									: profileImg.desktop_tablet.edges[0].node.childImageSharp.fixed
+							}
+							alt={profileImg.desktop_tablet.edges[0].node.name}
+							style={{ position: "absolute" }}
+							className={classes.image}
+						/>
 					</Grid>
 
 					{/*  Icons*/}

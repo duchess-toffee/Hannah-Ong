@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
+
 import { graphql } from "gatsby";
+import Img from "gatsby-image";
 
 import { ThemeProvider, useTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
@@ -97,10 +99,11 @@ const useStyles = makeStyles(theme => ({
 export default function BlogPost({ data }) {
 	const classes = useStyles();
 	const MuiTheme = useTheme();
+	const isMobile = useMediaQuery(MuiTheme.breakpoints.down("xs"));
 	const isTablet = useMediaQuery(MuiTheme.breakpoints.down("sm"));
 	const [theme, setTheme] = useState(false);
 	const [sectionIndex] = useState(0);
-	const post = data.markdownRemark;
+	const post = data.desktop_tablet;
 
 	const topDirection = isTablet ? "column-reverse" : "row";
 	const topSize = isTablet ? 12 : 6;
@@ -108,6 +111,7 @@ export default function BlogPost({ data }) {
 	if (typeof window !== "undefined") {
 		require("smooth-scroll")('a[href*="#"]');
 	}
+
 	return (
 		<>
 			<Helmet>
@@ -153,7 +157,15 @@ export default function BlogPost({ data }) {
 							{/* Top Right Section (Image) */}
 							<Grid container item justify="center" xs={topSize}>
 								<Box className={classes.border}>
-									<img src={post.frontmatter.photo.publicURL} alt={post.frontmatter.title} className={classes.image} />
+									<Img
+										fixed={
+											isMobile
+												? data.mobile_img.frontmatter.photo.childImageSharp.fixed
+												: post.frontmatter.photo.childImageSharp.fixed
+										}
+										alt={post.frontmatter.title}
+										className={classes.image}
+									/>
 								</Box>
 							</Grid>
 						</Grid>
@@ -170,7 +182,7 @@ export default function BlogPost({ data }) {
 
 export const query = graphql`
 	query($slug: String!) {
-		markdownRemark(fields: { slug: { eq: $slug } }) {
+		desktop_tablet: markdownRemark(fields: { slug: { eq: $slug } }) {
 			html
 			frontmatter {
 				title
@@ -179,7 +191,22 @@ export const query = graphql`
 				quote
 				quoteAuthor
 				photo {
-					publicURL
+					childImageSharp {
+						fixed(width: 500, quality: 100) {
+							...GatsbyImageSharpFixed
+						}
+					}
+				}
+			}
+		}
+		mobile_img: markdownRemark(fields: { slug: { eq: $slug } }) {
+			frontmatter {
+				photo {
+					childImageSharp {
+						fixed(width: 250, quality: 100) {
+							...GatsbyImageSharpFixed
+						}
+					}
 				}
 			}
 		}

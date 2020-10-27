@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { Helmet } from "react-helmet";
 
+import { useStaticQuery, graphql } from "gatsby";
+import Img from "gatsby-image";
+
 import { makeStyles } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -19,7 +22,7 @@ import COLORS from "../styling/colors";
 
 const useStyles = makeStyles(theme => ({
 	text: {
-		margin: theme.spacing(5, 0),
+		padding: theme.spacing(5, 2),
 	},
 	title: {
 		...FONT_STYLES.title,
@@ -32,6 +35,13 @@ const useStyles = makeStyles(theme => ({
 		...FONT_STYLES.subtitle,
 		color: COLORS.white,
 	},
+	image: {
+		width: "90vw",
+		height: "70vh",
+		[theme.breakpoints.down("xs")]: {
+			height: "50vh",
+		},
+	},
 }));
 export default function PageNotFound() {
 	const classes = useStyles();
@@ -41,6 +51,23 @@ export default function PageNotFound() {
 	if (typeof window !== "undefined") {
 		require("smooth-scroll")('a[href*="#"]');
 	}
+
+	const image = useStaticQuery(graphql`
+		query {
+			allFile(filter: { relativeDirectory: { regex: "/images/background/" } }) {
+				edges {
+					node {
+						name
+						childImageSharp {
+							fluid(quality: 100) {
+								...GatsbyImageSharpFluid
+							}
+						}
+					}
+				}
+			}
+		}
+	`);
 
 	return (
 		<>
@@ -72,7 +99,12 @@ export default function PageNotFound() {
 						</Grid>
 
 						<Grid item>
-							<img src={Image404} alt="Astronaut Floating in Space" className={classes.image} />
+							<Img
+								fluid={image.allFile.edges[0].node.childImageSharp.fluid}
+								alt={image.allFile.edges[0].node.name}
+								imgStyle={{ objectFit: "contain" }}
+								className={classes.image}
+							/>
 						</Grid>
 					</Grid>
 				</Layout>

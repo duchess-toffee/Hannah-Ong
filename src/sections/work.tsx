@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react";
 import Carousel from "../components/carousel/carousel";
 
 import { useStaticQuery, graphql } from "gatsby";
+import Img from "gatsby-image";
 
 import { useTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
@@ -133,10 +134,18 @@ export default function Work({ workRef }) {
 							title
 							description
 							icon {
-								publicURL
+								childImageSharp {
+									fixed(width: 105, height: 105, quality: 100) {
+										...GatsbyImageSharpFixed
+									}
+								}
 							}
 							coverPhoto {
-								publicURL
+								childImageSharp {
+									fixed(width: 580, height: 375, quality: 100) {
+										...GatsbyImageSharpFixed
+									}
+								}
 							}
 						}
 						fields {
@@ -181,7 +190,11 @@ export default function Work({ workRef }) {
 								className={classes.carouselButtonBase}
 							>
 								<Grid container key={index}>
-									<img src={node.frontmatter.icon.publicURL} alt={node.frontmatter.title} className={classes.image} />
+									<Img
+										fixed={node.frontmatter.icon.childImageSharp.fixed}
+										alt={node.frontmatter.title}
+										className={classes.image}
+									/>
 								</Grid>
 							</ButtonBase>
 						) : (
@@ -192,14 +205,10 @@ export default function Work({ workRef }) {
 								className={classes.carouselButtonBase}
 							>
 								<Grid container key={index} className={classes.carouselItem}>
-									<img
-										src={node.frontmatter.coverPhoto.publicURL}
+									<Img
+										fixed={node.frontmatter.coverPhoto.childImageSharp.fixed}
 										alt={node.frontmatter.title}
 										className={classes.image}
-										style={{
-											width: "580px",
-											height: "365px",
-										}}
 									/>
 									<Grid
 										container

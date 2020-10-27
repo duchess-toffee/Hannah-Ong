@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
+
 import { graphql } from "gatsby";
+import Img from "gatsby-image";
 
 import { ThemeProvider, useTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
@@ -191,7 +193,11 @@ export default function WorkPost({ data }) {
 							>
 								<DesktopBar className={classes.imageBar} />
 								<Grid item className={classes.imageContainer}>
-									<img src={post.frontmatter.photo.publicURL} alt={post.frontmatter.title} className={classes.image} />
+									<Img
+										fluid={post.frontmatter.photo.childImageSharp.fluid}
+										alt={post.frontmatter.title}
+										className={classes.image}
+									/>
 								</Grid>
 							</Grid>
 
@@ -227,10 +233,11 @@ export const query = graphql`
 				tools
 				link
 				photo {
-					publicURL
-				}
-				coverPhoto {
-					publicURL
+					childImageSharp {
+						fluid(quality: 100) {
+							...GatsbyImageSharpFluid
+						}
+					}
 				}
 			}
 		}
