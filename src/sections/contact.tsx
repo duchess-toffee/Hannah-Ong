@@ -41,9 +41,15 @@ const useStyles = makeStyles(theme => ({
 		"& > .MuiOutlinedInput-root": {
 			borderRadius: "0px",
 			border: "1px solid white",
+			"& > .MuiInputBase-input:-webkit-autofill": {
+				borderRadius: "0px",
+				WebkitBorderRadius: "0px",
+				// boxShadow: "none",
+				// WebkitBoxShadow: "none",
+			},
 		},
 		[theme.breakpoints.down("xs")]: {
-			width: "100%",
+			width: "125%",
 		},
 	},
 }));
@@ -96,7 +102,14 @@ export default function Contact({ contactRef }) {
 			>
 				<Grid container direction="column" alignItems="center" item>
 					<Drawer open={open}>
-						<Grid container item direction="column" alignItems="center" className={classes.textInputs}>
+						<Grid
+							container
+							item
+							direction="column"
+							alignItems="center"
+							alignContent="center"
+							className={classes.textInputs}
+						>
 							<TextField name="name" placeholder="Name" variant="outlined" required className={classes.textField} />
 							<TextField
 								name="email"
@@ -117,7 +130,7 @@ export default function Contact({ contactRef }) {
 							/>
 						</Grid>
 					</Drawer>
-					<Grid item onClick={() => setOpen(false)}>
+					<Grid item>
 						{open ? (
 							<MainButton type="submit" ariaLabel={"Submit Contact Form"}>
 								Submit
