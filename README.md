@@ -78,7 +78,7 @@ When you're ready to deploy, follow the below steps:
 1. `gatsby build` will build your site, generating static HTML and per-route JavaScript code bundles.
 2. `gatsby serve` will run the built project in `localhost:9000` (unless you're running something in `9000`, then it'll increment) _Don't forget to hard refresh the page to account of service workers_
 3. `gatsby serve -H 0.0.0.0` will run the project in your local IP Address. This is helpful if you want to test across multiple devices. (If you forget how to check your local IP address, open up the **Command Prompt** and type in **ipconfig**. The **IPv4 Address** is what you're looking for). _Don't forget to hard refresh the page to account of service workers_
-4. `gh-pages -d public` deploys the built site to `gh-pages` which canonically becomes https://hannahong.dev
+4. `npx gh-pages -d public` deploys the built site to `gh-pages` which canonically becomes https://hannahong.dev
 5. Don't forget to `git add`, `git commit`, and `git push` to the repo as well to save your progress.
 
 _Go to [Contact API](https://github.com/duchess-toffee/hannah-ong-contact-api) to see more information on how the contact section works_
