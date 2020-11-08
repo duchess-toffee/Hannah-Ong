@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { Helmet } from "react-helmet";
 
+import { useStaticQuery, graphql } from "gatsby";
+
 import Layout from "../components/layouts/layout";
 import Hero from "../sections/hero";
 import About from "../sections/about";
@@ -83,6 +85,18 @@ export default function Home() {
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, [aboutPosition, workPosition, blogPosition, contactPosition, handleScroll]);
 
+	const ogImage = useStaticQuery(graphql`
+		query {
+			allFile(filter: { relativeDirectory: { regex: "/og-image/" } }) {
+				edges {
+					node {
+						publicURL
+					}
+				}
+			}
+		}
+	`);
+
 	return (
 		<>
 			<Helmet>
@@ -92,6 +106,7 @@ export default function Home() {
 					name="description"
 					content="Hannah Ong. 💻 Web Developer. 🎨 Occasional Designer. 🧗‍ Boulderer. 🌷 Amateur Gardener. 🐕 Dog Owner and Lover. See photos, work, blog posts, and additional information about Hannah Ong / duchess-toffee."
 				/>
+				<meta property="og:image" content={ogImage.allFile.edges[0].node.publicURL} />
 			</Helmet>
 			<ThemeProvider theme={darkTheme}>
 				<CssBaseline />
